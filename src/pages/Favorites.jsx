@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import SearchInput from "../components/SearchInput";
 import * as actionTypes from "../actions/types";
 import { useDispatch, useSelector } from "react-redux";
-
 import { unsplash, toJson } from "../utils/unsplashUtils";
 
 import styled from "styled-components";
@@ -10,7 +9,8 @@ import PhotoList from "../components/PhotoList";
 
 const Favorites = props => {
   const [query, setQuery] = useState("");
-  const { results, liked } = useSelector(state => state);
+  const { liked } = useSelector(state => state);
+
   const dispatch = useDispatch();
 
   const handleSearchChange = val => {

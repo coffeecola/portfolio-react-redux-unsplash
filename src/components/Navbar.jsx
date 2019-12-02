@@ -9,12 +9,7 @@ const Navbar = () => {
         <i class="fa fa-search"></i>
         Search
       </StyledLink>
-      <StyledLink
-        onClick={() => {
-          console.log("favorites visited");
-        }}
-        to="/favorites"
-      >
+      <StyledLink to="/favorites">
         <i class="fa fa-heart"></i>
         Favorites
       </StyledLink>

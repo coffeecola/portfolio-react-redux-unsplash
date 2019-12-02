@@ -12,8 +12,7 @@ const Home = () => {
   const [query, setQuery] = useState("");
   const { results, liked } = useSelector(state => state);
   const dispatch = useDispatch();
-  console.log("liked:");
-  console.log(liked);
+
   const handleSearchChange = val => {
     setQuery(val);
   };

@@ -9,7 +9,6 @@ const PhotoList = ({
   images,
   liked = []
 }) => {
-  console.log(images);
   return (
     <ImageGrid className="image-grid">
       {images.map(img => {
