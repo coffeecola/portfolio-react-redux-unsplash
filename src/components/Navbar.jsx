@@ -11,7 +11,6 @@ const Navbar = () => {
       </StyledLink>
       <StyledLink
         onClick={() => {
-          // this.props.clearList();
           console.log("favorites visited");
         }}
         to="/favorites"
