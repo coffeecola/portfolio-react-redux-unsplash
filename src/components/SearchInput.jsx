@@ -2,20 +2,20 @@ import React from "react";
 
 import styled from "styled-components";
 
-const SearchInput = ({ handleSearchChange, handleSubmit }) => {
+const SearchInput = ({ handleSearchChange, handleSubmit, query }) => {
   return (
     <SearchForm
       onSubmit={e => {
         e.preventDefault();
         handleSubmit();
       }}
-      style={{ maxWidth: 768 }}
     >
       <input
         className="form-control my-0 py-1 red-border"
         type="text"
         placeholder="Search Pictures"
         aria-label="Search Pictures"
+        value={query}
         onChange={e => {
           handleSearchChange(e.currentTarget.value);
           // this.searchQuery = e.currentTarget.value;
@@ -31,6 +31,7 @@ const SearchInput = ({ handleSearchChange, handleSubmit }) => {
 };
 
 const SearchForm = styled.form`
+  max-width: 768px;
   position: relative;
   input {
     background-color: #dbe0e6;

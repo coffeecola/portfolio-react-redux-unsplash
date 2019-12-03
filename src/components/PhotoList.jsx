@@ -10,7 +10,7 @@ const PhotoList = ({
   liked = []
 }) => {
   return (
-    <ImageGrid className="image-grid">
+    <ImageGrid>
       {images.map(img => {
         const isLiked = liked.find(i => i.id === img.id);
         return (
@@ -39,9 +39,14 @@ const ImageWrapper = styled.div`
   position: relative;
   height: 100%;
   i {
+    opacity: 0.8;
+    transition: 0.3s;
     position: absolute;
     bottom: 10px;
     right: 10px;
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 

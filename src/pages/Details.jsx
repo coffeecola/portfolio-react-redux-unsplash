@@ -55,6 +55,9 @@ const Details = props => {
   );
 };
 const ImgWrapper = styled.div`
+  @media (max-width: 360px) {
+    height: 350px;
+  }
   height: 450px;
   margin: -16px;
   img {
@@ -78,7 +81,7 @@ const DetailsContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "downloads country" "user likes";
   height: 200px;
-  margin-top: 35px;
+  margin: 35px 0px 80px 0px;
   .subTitle {
     display: block;
     font-family: apple-system, BlinkMacSystemFont, sans-serif;
@@ -87,6 +90,9 @@ const DetailsContainer = styled.div`
     color: #9aa5b1;
   }
   .title {
+    @media (max-width: 360px) {
+      font-size: 18px;
+    }
     font-family: apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 24px;
     line-height: 29px;

@@ -4,8 +4,6 @@ const initialState = {
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
-  console.log(type);
-  console.log(payload);
   switch (type) {
     case "SEARCH_IMG":
       console.log("test");

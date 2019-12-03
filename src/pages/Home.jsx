@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import SearchInput from "../components/SearchInput";
-import * as actionTypes from "../actions/types";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
+
+import styled from "styled-components";
+
+import SearchInput from "../components/SearchInput";
+import PhotoList from "../components/PhotoList";
+import * as actionTypes from "../actions/types";
 
 import { unsplash, toJson } from "../utils/unsplashUtils";
 
-import styled from "styled-components";
-import PhotoList from "../components/PhotoList";
-
 const Home = () => {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
   const { results, liked } = useSelector(state => state);
   const dispatch = useDispatch();
 
@@ -18,11 +21,22 @@ const Home = () => {
   };
 
   const handleSubmit = () => {
+    fetchImages(query, 1, 20, { orientation: "portrait" });
+  };
+
+  const fetchImages = (query, page, take) => {
     unsplash.search
-      .photos(query, 1, 10, { orientation: "portrait" })
+      .photos(query, page, take, { orientation: "portrait" })
       .then(toJson)
-      .then(({ results }) => {
-        dispatch({ type: actionTypes.SEARCH_IMG, payload: results });
+      .then(async res => {
+        let newImages;
+        if (results.length > 0) {
+          newImages = [...results, ...res.results];
+          console.log(newImages);
+        } else {
+          newImages = res.results;
+        }
+        dispatch({ type: actionTypes.SEARCH_IMG, payload: newImages });
       });
   };
 
@@ -39,14 +53,24 @@ const Home = () => {
       <SearchInput
         handleSearchChange={handleSearchChange}
         handleSubmit={handleSubmit}
+        query={query}
       ></SearchInput>
       <HomeTitle>Daily Pictures</HomeTitle>
-      <PhotoList
-        liked={liked}
-        handleLikeClick={handleLikeClick}
-        handleUnlikeClick={handleUnlikeClick}
-        images={results}
-      ></PhotoList>
+      <InfiniteScroll
+        dataLength={results ? results.length : 20}
+        next={() => {
+          fetchImages(page + 1);
+          setPage(page + 1);
+        }}
+        hasMore={true}
+      >
+        <PhotoList
+          liked={liked}
+          handleLikeClick={handleLikeClick}
+          handleUnlikeClick={handleUnlikeClick}
+          images={results}
+        ></PhotoList>
+      </InfiniteScroll>
     </React.Fragment>
   );
 };

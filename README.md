@@ -1,3 +1,16 @@
+Project using Unsplash API with React Hooks + Redux
+
+Prerequisites
+
+- Node
+- Unsplash API key (set in .env)
+
+Requirements:
+
+- Show all public repositories of the user
+- List contributors ordered by the number of contributions per contributor in descending order
+- Use Github REST API
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

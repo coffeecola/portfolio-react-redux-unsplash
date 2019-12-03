@@ -11,8 +11,6 @@ import Details from "./pages/Details";
 import Favorites from "./pages/Favorites";
 import Navbar from "./components/Navbar";
 
-import "./App.css";
-
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
