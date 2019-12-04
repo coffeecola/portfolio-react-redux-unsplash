@@ -1,7 +1,11 @@
-const initialState = {
-  results: [],
-  liked: []
-};
+const initialState = loadFromLocalStorage();
+
+function loadFromLocalStorage() {
+  const likedState = JSON.parse(localStorage.getItem("likedImages"));
+  return likedState
+    ? { results: [], liked: likedState }
+    : { results: [], liked: [] };
+}
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {

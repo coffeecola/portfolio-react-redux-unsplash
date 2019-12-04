@@ -18,7 +18,6 @@ const SearchInput = ({ handleSearchChange, handleSubmit, query }) => {
         value={query}
         onChange={e => {
           handleSearchChange(e.currentTarget.value);
-          // this.searchQuery = e.currentTarget.value;
           e.preventDefault();
         }}
       />

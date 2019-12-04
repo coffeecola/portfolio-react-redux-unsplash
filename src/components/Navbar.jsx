@@ -6,11 +6,11 @@ const Navbar = () => {
   return (
     <BottomNavigation>
       <StyledLink to="/">
-        <i class="fa fa-search"></i>
+        <i className="fa fa-search"></i>
         Search
       </StyledLink>
       <StyledLink to="/favorites">
-        <i class="fa fa-heart"></i>
+        <i className="fa fa-heart"></i>
         Favorites
       </StyledLink>
     </BottomNavigation>

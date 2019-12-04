@@ -16,6 +16,12 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+store.subscribe(() => {
+  const { liked } = store.getState();
+  const likedStringifyed = JSON.stringify(liked);
+  localStorage.setItem("likedImages", likedStringifyed);
+});
+
 const App = () => {
   return (
     <Provider store={store}>
