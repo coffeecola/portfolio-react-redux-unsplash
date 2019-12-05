@@ -16,6 +16,7 @@ const SearchInput = ({ handleSearchChange, handleSubmit, query }) => {
         placeholder="Search Pictures"
         aria-label="Search Pictures"
         value={query}
+        name="search"
         onChange={e => {
           handleSearchChange(e.currentTarget.value);
           e.preventDefault();
