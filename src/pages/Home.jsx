@@ -32,7 +32,6 @@ const Home = () => {
         let newImages;
         if (results.length > 0) {
           newImages = [...results, ...res.results];
-          console.log(newImages);
         } else {
           newImages = res.results;
         }
