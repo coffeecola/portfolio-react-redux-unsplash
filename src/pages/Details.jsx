@@ -20,7 +20,7 @@ const Details = props => {
         setImg({ location, downloads, urls, user, likes });
         setLoading(false);
       });
-  });
+  }, [props]);
 
   return loading ? (
     <div>loading</div>
@@ -28,7 +28,7 @@ const Details = props => {
     <React.Fragment>
       <ImgWrapper>
         <div onClick={() => props.history.go(-1)}>
-          <i class="fa fa-arrow-left"></i>
+          <i className="fa fa-arrow-left"></i>
         </div>
 
         <img alt="" src={img.urls.regular} />
