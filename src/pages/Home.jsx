@@ -21,7 +21,7 @@ const Home = () => {
   };
 
   const handleSubmit = () => {
-    fetchImages(query, 1, 20, { orientation: "portrait" });
+    fetchImages(query, 1, 20);
   };
 
   const fetchImages = (query, page, take) => {
@@ -58,7 +58,7 @@ const Home = () => {
       <InfiniteScroll
         dataLength={results ? results.length : 20}
         next={() => {
-          fetchImages(page + 1);
+          fetchImages(query, page + 1);
           setPage(page + 1);
         }}
         hasMore={true}

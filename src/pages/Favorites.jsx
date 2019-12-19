@@ -18,6 +18,8 @@ const Favorites = props => {
   };
 
   const handleSubmit = () => {
+    console.log("handle submit favorites");
+    console.log(query);
     unsplash.search
       .photos(query, 1, 10, { orientation: "portrait" })
       .then(toJson)
