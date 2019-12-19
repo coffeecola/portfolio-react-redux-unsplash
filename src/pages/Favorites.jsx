@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchInput from "../components/SearchInput";
 import * as actionTypes from "../actions/types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { unsplash, toJson } from "../utils/unsplashUtils";
 
 import styled from "styled-components";
 import PhotoList from "../components/PhotoList";
 
 const Favorites = props => {
-  const [query, setQuery] = useState("");
-  const { liked } = useSelector(state => state);
+  const { liked, query } = props;
 
   const dispatch = useDispatch();
 
   const handleSearchChange = val => {
-    setQuery(val);
+    dispatch({ type: actionTypes.SET_QUERY, payload: val });
   };
 
   const handleSubmit = () => {
-    console.log("handle submit favorites");
-    console.log(query);
     unsplash.search
       .photos(query, 1, 10, { orientation: "portrait" })
       .then(toJson)

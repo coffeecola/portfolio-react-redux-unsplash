@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 
@@ -10,18 +10,30 @@ import * as actionTypes from "../actions/types";
 
 import { unsplash, toJson } from "../utils/unsplashUtils";
 
-const Home = () => {
-  const [query, setQuery] = useState("");
+const Home = ({ liked, results, query }) => {
   const [page, setPage] = useState(1);
-  const { results, liked } = useSelector(state => state);
+
   const dispatch = useDispatch();
 
   const handleSearchChange = val => {
-    setQuery(val);
+    dispatch({ type: actionTypes.SET_QUERY, payload: val });
+  };
+
+  const handleUnlikeClick = img => {
+    dispatch({ type: actionTypes.REMOVE_LIKE, payload: img });
+  };
+
+  const handleLikeClick = img => {
+    dispatch({ type: actionTypes.ADD_LIKE, payload: img });
   };
 
   const handleSubmit = () => {
-    fetchImages(query, 1, 20);
+    unsplash.search
+      .photos(query, 1, 10, { orientation: "portrait" })
+      .then(toJson)
+      .then(({ results }) => {
+        dispatch({ type: actionTypes.SEARCH_IMG, payload: results });
+      });
   };
 
   const fetchImages = (query, page, take) => {
@@ -37,14 +49,6 @@ const Home = () => {
         }
         dispatch({ type: actionTypes.SEARCH_IMG, payload: newImages });
       });
-  };
-
-  const handleUnlikeClick = img => {
-    dispatch({ type: actionTypes.REMOVE_LIKE, payload: img });
-  };
-
-  const handleLikeClick = img => {
-    dispatch({ type: actionTypes.ADD_LIKE, payload: img });
   };
 
   return (

@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { createStore } from "redux";
-import { reducer } from "./reducers/index";
-import { Provider } from "react-redux";
 
 import styled from "styled-components";
 
@@ -11,31 +8,33 @@ import Details from "./pages/Details";
 import Favorites from "./pages/Favorites";
 import Navbar from "./components/Navbar";
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-
-store.subscribe(() => {
-  const { liked } = store.getState();
-  const likedStringifyed = JSON.stringify(liked);
-  localStorage.setItem("likedImages", likedStringifyed);
-});
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { results, liked, query } = useSelector(state => state);
+  console.log(results, liked);
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Root>
-          <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/favorites" component={Favorites}></Route>
-            <Route path="/photos/:id" component={Details}></Route>
-          </Switch>
-          <Navbar></Navbar>
-        </Root>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Root>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home results={results} query={query} liked={liked} />
+            )}
+          ></Route>
+          <Route
+            render={props => (
+              <Favorites {...props} query={query} liked={liked} />
+            )}
+            path="/favorites"
+          ></Route>
+          <Route path="/photos/:id" component={Details}></Route>
+        </Switch>
+        <Navbar></Navbar>
+      </Root>
+    </BrowserRouter>
   );
 };
 
