@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const { results, liked, query } = useSelector(state => state);
-  console.log(results, liked);
   return (
     <BrowserRouter>
       <Root>

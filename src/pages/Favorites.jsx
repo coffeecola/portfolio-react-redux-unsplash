@@ -1,61 +1,16 @@
 import React from "react";
-import SearchInput from "../components/SearchInput";
-import * as actionTypes from "../actions/types";
-import { useDispatch } from "react-redux";
-import { unsplash, toJson } from "../utils/unsplashUtils";
+import Main from "../components/Main";
 
-import styled from "styled-components";
-import PhotoList from "../components/PhotoList";
-
-const Favorites = props => {
-  const { liked, query } = props;
-
-  const dispatch = useDispatch();
-
-  const handleSearchChange = val => {
-    dispatch({ type: actionTypes.SET_QUERY, payload: val });
-  };
-
-  const handleSubmit = () => {
-    unsplash.search
-      .photos(query, 1, 10, { orientation: "portrait" })
-      .then(toJson)
-      .then(({ results }) => {
-        dispatch({ type: actionTypes.SEARCH_IMG, payload: results });
-        props.history.push("/");
-      });
-  };
-
-  const handleUnlikeClick = img => {
-    dispatch({ type: actionTypes.REMOVE_LIKE, payload: img });
-  };
-
-  const handleLikeClick = img => {
-    dispatch({ type: actionTypes.ADD_LIKE, payload: img });
-  };
-
+const Favorites = ({ liked, results, query, history }) => {
   return (
-    <React.Fragment>
-      <SearchInput
-        handleSearchChange={handleSearchChange}
-        handleSubmit={handleSubmit}
-      ></SearchInput>
-      <HomeTitle>Daily Pictures</HomeTitle>
-      <PhotoList
-        liked={liked}
-        handleLikeClick={handleLikeClick}
-        handleUnlikeClick={handleUnlikeClick}
-        images={liked}
-      ></PhotoList>
-    </React.Fragment>
+    <Main
+      history={history}
+      liked={liked}
+      results={results}
+      query={query}
+      titlePage="Favorites"
+    ></Main>
   );
 };
-
-const HomeTitle = styled.h1`
-  font-family: apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 34px;
-  color: #323f4b;
-  margin: 36px 0 26px 0;
-`;
 
 export default Favorites;
